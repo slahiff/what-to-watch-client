@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
+import Button from 'react-bootstrap/Button'
 
 import apiUrl from '../../apiConfig'
 import Layout from '../shared/Layout'
@@ -30,18 +31,20 @@ const Review = props => {
 
   if (deleted) {
     return <Redirect to={
-      { pathname: '/', state: { msg: 'Review succesfully deleted!' } }
+      { pathname: '/shows', state: { msg: 'Review succesfully deleted!' } }
     } />
   }
 
   return (
     <Layout>
       <h4>{review.title}</h4>
-      <p>Date relased: {review.year}</p>
-      <p>Directed by: {review.director}</p>
+      <p>{review.body}</p>
+      <p>Rating: {review.rating}</p>
       <button onClick={destroy}>Delete Review</button>
       <Link to={`/reviews/${props.match.params.id}/edit`}>
-        <button>Edit</button>
+        <Button variant="outline-danger">
+        Edit Review
+        </Button>
       </Link>
       <Link to="/reviews">Back to all reviews</Link>
     </Layout>
