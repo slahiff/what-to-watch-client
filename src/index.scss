@@ -1,1 +1,81 @@
 @import '~bootstrap/scss/bootstrap';
+
+$border: 1px solid #ccc;
+$footer-color: #e8e8e8;
+$show-div: #e8e8e8;
+$show-wrapper: #17a2b8;
+
+html,
+body {
+  height: 100%;
+  position: relative;
+}
+
+main {
+  display: block;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+label,
+textarea,
+input {
+  font-size: .8rem;
+  letter-spacing: 1px;
+  padding: 5px;
+}
+
+textarea,
+input {
+  border: $border;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #999;
+  padding: 10px;
+}
+
+label {
+  display: block;
+}
+
+input {
+  &[type='number'] {
+    width: 6em;
+  }
+}
+
+button {
+  margin-right: 5px;
+}
+
+h4 {
+  text-align: center;
+}
+
+.footer {
+  background-color: $footer-color;
+  border: $border;
+  bottom: 0;
+  line-height: 2em;
+  margin-bottom: 0;
+  margin-top: 10px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.show-div {
+  background-color: $show-div;
+  border: $border;
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px #999;
+  padding: 10px;
+}
+
+.show-wrapper {
+  background-color: $show-wrapper;
+  border: $border;
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px #999;
+  padding: 10px;
+}
