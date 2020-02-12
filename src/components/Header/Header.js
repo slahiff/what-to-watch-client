@@ -25,7 +25,8 @@ const alwaysOptions = (
 
 const Header = ({ user }) => (
   <Navbar bg="info" variant="dark" expand="md">
-    <Navbar.Brand href="#">
+    <Navbar.Brand href="#" className="navbar-brand">
+      <img src="https://img.icons8.com/office/80/000000/retro-tv.png" width="30" height="30" className="tv-img" alt="tv icon"/>
       What to Watch
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
