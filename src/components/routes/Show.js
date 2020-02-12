@@ -21,30 +21,39 @@ const Show = props => {
   }
 
   const reviewsArr = show.reviews.map(review => (
-    <div key={review.id} className="review-div">
-      <Link to={`/reviews/${review.id}`}>{review.title}
+    <div key={review.id} className="review-div card">
+      <Link className="card-header" to={`/reviews/${review.id}`}>{review.title}
       </Link>
+      <div className="card-footer">
+      </div>
     </div>
   ))
+
+  // const avgRating = show.reviews.reduce(reviews => (
+  //
+  // ))
 
   return (
     <Layout>
       <h4>{show.title + ' (Season ' + show.season_number + ')'}</h4>
+      <iframe className="show-iframe mx-auto d-block" width="560" height="315" src={`https://www.youtube.com/embed/${show.trailer_url.slice(-11)}?hd=1&amp;modestbranding=1`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       <br/>
       <ul>
         <li>Network/Streaming Service: {show.network}</li>
         <li>Number of Episodes: {show.total_episodes}</li>
         <li>Date Released: {show.release_date}</li>
-        <li><a href={show.trailer_url} target="_blank" rel="noopener noreferrer">Link to Trailer</a></li>
+        <li>Avg. Rating:</li>
       </ul>
       <br/>
       <Link to={'/create-review'}>
-        <Button variant="outline-success">
+        <Button variant="outline-success" className="create-review-btn">
         Create a Review
         </Button>
       </Link>
+      <br/>
       <h6>User Reviews:</h6>
-      <div className="review-wrapper">{show.reviews ? reviewsArr : 'No reviews yet...'}</div>
+      <div className="review-wrapper">{show.reviews ? reviewsArr : <p>No reviews yet...</p>}</div>
+      <br/>
       <Link to="/shows">Back to all shows</Link>
     </Layout>
   )
