@@ -24,8 +24,6 @@ const Show = props => {
     <div key={review.id} className="review-div card">
       <Link className="card-header" to={`/reviews/${review.id}`}>{review.title}
       </Link>
-      <div className="card-footer">
-      </div>
     </div>
   ))
 
@@ -42,7 +40,6 @@ const Show = props => {
         <li>Network/Streaming Service: {show.network}</li>
         <li>Number of Episodes: {show.total_episodes}</li>
         <li>Date Released: {show.release_date}</li>
-        <li>Avg. Rating:</li>
       </ul>
       <br/>
       <Link to={'/create-review'}>
@@ -52,7 +49,7 @@ const Show = props => {
       </Link>
       <br/>
       <h6>User Reviews:</h6>
-      <div className="review-wrapper">{show.reviews ? reviewsArr : <p>No reviews yet...</p>}</div>
+      <div className="review-wrapper">{show.reviews.length !== 0 ? reviewsArr : <i className="no-reviews-message">No reviews yet...</i>}</div>
       <br/>
       <Link to="/shows">Back to all shows</Link>
     </Layout>
