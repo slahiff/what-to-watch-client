@@ -19,25 +19,26 @@ const ReviewForm = ({ review, show, handleSubmit, handleChange, cancelPath }) =>
     <input
       name="title"
       placeholder="Title"
-      required
       value={review.title}
       onChange={handleChange}
     />
 
     <label>Comment</label>
-    <input
-      type="text"
+    <textarea
+      rows="5" cols="50" wrap="physical"
       placeholder="Excellent series, highly recommend..."
-      name="comment"
+      name="body"
       value={review.body}
-      onChange={handleChange}>
-    </input>
+      onChange={handleChange}
+      className="text"
+    ></textarea>
 
     <label>Show ID</label>
     <input
       placeholder="show_id"
       value={review.show_id}
       name="show_id"
+      className="show-id-field"
       type="number" min="1"
       onChange={handleChange}
     />

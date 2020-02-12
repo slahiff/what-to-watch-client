@@ -13,7 +13,7 @@ body {
 
 main {
   display: block;
-  min-height: 100vh;
+  min-height: 82vh;
   overflow: hidden;
   position: relative;
 }
@@ -60,6 +60,7 @@ nav {
   background-color: $footer-color;
   border: $border;
   bottom: 0;
+  height: 5vh;
   line-height: 2em;
   margin-bottom: 0;
   margin-top: 10px;
@@ -86,4 +87,8 @@ nav {
 
 .tv-img {
   margin-right: .5em;
+}
+
+.show-id-field {
+  width: 5em;
 }
