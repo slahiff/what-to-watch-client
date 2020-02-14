@@ -24,8 +24,8 @@ const Show = (props) => {
     <div key={review.id} className="review-div card">
       <Link className="card-header" to={`/reviews/${review.id}`}>{review.title}
       </Link>
-      <div className="card-text">{review.body}</div>
-      <div className="card-footer">{review.user_id}</div>
+      <div className="card-text"></div>
+      <div className="card-footer">Rating:{review.rating}</div>
     </div>
   ))
 
