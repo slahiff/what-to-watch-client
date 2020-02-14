@@ -1,47 +1,77 @@
-// import React from 'react'
-// import { Link } from 'react-router-dom'
-//
-// import Button from 'react-bootstrap/Button'
-//
-// const ReviewForm = ({ review, show, handleSubmit, handleChange, cancelPath }) => (
-//   <form onSubmit={handleSubmit} className="review-form">
-//
-//     <label>Rating</label>
-//     <input
-//       placeholder="0-100"
-//       value={review.rating}
-//       name="rating"
-//       type="number" min="0" max="100"
-//       onChange={handleChange}
-//     />
-//
-//     <label>Title</label>
-//     <input
-//       name="title"
-//       placeholder="Title"
-//       required
-//       value={review.title}
-//       onChange={handleChange}
-//     />
-//
-//     <label htmlFor="review-form">Comment</label>
-//     <textarea
-//       placeholder="Excellent series, highly recommend..."
-//       form="review-form" name="comment" id="review-form"
-//       cols="60" rows="10" wrap="soft" value={review.body} onChange={handleChange}>
-//       Type
-//     </textarea>
-//
-//     <Button type="submit" variant="outline-primary">
-//     Submit
-//     </Button>
-//
-//     <Link to={cancelPath}>
-//       <Button variant='outline-danger'>
-//       Cancel
-//       </Button>
-//     </Link>
-//   </form>
-// )
-//
-// export default ReviewForm
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+import Button from 'react-bootstrap/Button'
+
+const ShowForm = ({ show, handleSubmit, handleChange, cancelPath }) => (
+  <form onSubmit={handleSubmit} className="show-form">
+
+    <label>Show Title</label>
+    <input
+      placeholder="Game of Thrones"
+      value={show.title}
+      name="title"
+      required
+      onChange={handleChange}
+    />
+
+    <label>Season Number</label>
+    <input
+      type="number"
+      name="season_number"
+      placeholder="1"
+      required
+      value={show.season_number}
+      onChange={handleChange}
+    />
+
+    <label>Total Episodes</label>
+    <input
+      type="number"
+      name="total_episodes"
+      placeholder="1"
+      required
+      value={show.total_episodes}
+      onChange={handleChange}
+    />
+
+    <label>Network/Streaming Service</label>
+    <input
+      placeholder="Netfelix, HBO, CBS..."
+      value={show.network}
+      name="network"
+      required
+      onChange={handleChange}
+    />
+
+    <label>Released Date</label>
+    <input
+      type="date"
+      placeholder="YYYY-MM-DD"
+      value={show.release_date}
+      name="release_date"
+      onChange={handleChange}
+    />
+
+    <label>Youtube Trailer URL</label>
+    <input
+      placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      value={show.trailer_url}
+      name="trailer_url"
+      required
+      onChange={handleChange}
+    />
+
+    <Button type="submit" variant="outline-primary">
+    Submit
+    </Button>
+
+    <Link to={cancelPath}>
+      <Button variant='outline-danger'>
+      Cancel
+      </Button>
+    </Link>
+  </form>
+)
+
+export default ShowForm

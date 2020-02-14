@@ -3,54 +3,54 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 import apiUrl from '../../apiConfig'
-import ReviewForm from '../shared/ReviewForm'
+import ShowForm from '../shared/ShowForm'
 import Layout from '../shared/Layout'
 import messages from '../AutoDismissAlert/messages'
 
-const ReviewCreate = (props) => {
-  const [review, setReview] = useState({ title: '', body: '', rating: '', show_id: '' })
-  const [createdReviewId, setCreatedReviewId] = useState(null)
+const ShowCreate = (props) => {
+  const [show, setShow] = useState({ title: '', season_number: '', total_episodes: '', network: '', release_date: '', trailer_url: '' })
+  const [createdShowId, setCreatedShowId] = useState(null)
 
   const handleChange = event => {
     event.persist()
-    setReview(review => ({ ...review, [event.target.name]: event.target.value }))
+    setShow(show => ({ ...show, [event.target.name]: event.target.value }))
   }
 
   const handleSubmit = event => {
     event.preventDefault()
 
     axios({
-      url: `${apiUrl}/reviews`,
+      url: `${apiUrl}/shows`,
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${props.user.token}`
       },
-      data: { review }
+      data: { show }
     })
-      .then(res => setCreatedReviewId(res.data.review.id))
+      .then(res => setCreatedShowId(res.data.show.id))
       .then(() => alert({
-        heading: 'Review created, huzzah!!',
-        message: messages.reviewCreateSuccess,
+        heading: 'Show created, huzzah!!',
+        message: messages.showCreateSuccess,
         variant: 'success'
       }))
       .catch(error => {
         alert({
           heading: 'Shucks...',
-          message: messages.reviewCreateFailure,
+          message: messages.showCreateFailure,
           variant: 'danger'
         })
         throw (error)
       })
   }
 
-  if (createdReviewId) {
-    return <Redirect to={`/shows/${createdReviewId}`} />
+  if (createdShowId) {
+    return <Redirect to={`/shows/${createdShowId}`} />
   }
 
   return (
     <Layout>
-      <ReviewForm
-        review={review}
+      <ShowForm
+        show={show}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         cancelPath="/shows"
@@ -59,4 +59,4 @@ const ReviewCreate = (props) => {
   )
 }
 
-export default ReviewCreate
+export default ShowCreate
