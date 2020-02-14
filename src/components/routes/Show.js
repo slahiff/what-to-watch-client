@@ -7,7 +7,7 @@ import apiUrl from '../../apiConfig'
 import Layout from '../shared/Layout'
 // import Reviews from './Reviews'
 
-const Show = props => {
+const Show = (props, { user }) => {
   const [show, setShow] = useState(null)
 
   useEffect(() => {
@@ -24,6 +24,8 @@ const Show = props => {
     <div key={review.id} className="review-div card">
       <Link className="card-header" to={`/reviews/${review.id}`}>{review.title}
       </Link>
+      <div className="card-text">{review.body}</div>
+      <div className="card-footer">{review.user}</div>
     </div>
   ))
 

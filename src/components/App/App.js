@@ -8,6 +8,7 @@ import Footer from '../shared/Footer'
 import Home from '../routes/Home'
 import About from '../About'
 import CreateReview from '../routes/CreateReview'
+import CreateShow from '../routes/CreateShow'
 // import Layout from '../shared/Layout'
 import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
@@ -51,6 +52,10 @@ const App = props => {
 
         <AuthenticatedRoute user={user} path='/create-review' render={({ match }) => (
           <CreateReview user={user} />
+        )} />
+
+        <AuthenticatedRoute user={user} path='/create-show' render={({ match }) => (
+          <CreateShow user={user} />
         )} />
 
         <Route path='/sign-up' render={() => (
