@@ -9,5 +9,11 @@ export default {
   createReviewSuccess: 'You successfully created a review - thanks for making What to Watch a better place!',
   createReviewFailure: 'This is embarassing.. there was an error during the creation of your review.',
   showCreateFailure: 'Error creating show... please doublecheck all fields are filled in.',
-  showCreateSuccess: 'Thanks for adding to the WTW library!'
+  showCreateSuccess: 'Thanks for adding to the WTW library!',
+  reviewEditFailure: 'Hmm.. seems there was an erroring editing your review.',
+  reviewEditSuccess: 'Your edits were saved - thanks for updating!',
+  showsIndexFailure: 'There was an error retrieving the shows. Please try again or come back later.',
+  reviewIndexFailure: 'There was an error retrieving the reviews. Please try again or come back later.',
+  reviewDeleteFailure: 'There was an error when trying to delete this review. Please try again or come back later.',
+  reviewDeleteSuccess: 'Had second thoughts? No worries, POOF, your review is gone.'
 }

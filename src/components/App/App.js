@@ -7,8 +7,11 @@ import Header from '../Header/Header'
 import Footer from '../shared/Footer'
 import Home from '../routes/Home'
 import About from '../About'
+
 import CreateReview from '../routes/CreateReview'
+import EditReview from '../routes/EditReview'
 import CreateShow from '../routes/CreateShow'
+
 // import Layout from '../shared/Layout'
 import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
@@ -45,17 +48,28 @@ const App = props => {
         <h3>{props.location.state ? props.location.state.msg : null}</h3>
         <Route exact path='/' component={Home} />
         <Route exact path='/about' component={About} />
-        <Route exact path='/shows' component={Shows} />
-        <Route exact path='/shows/:id' component={Show} />
-        <Route exact path ='/reviews' component={Reviews} />
-        <Route exact path ='/reviews/:id' component={Review} />
+        <Route exact path='/shows' render={({ match }) => (
+          <Shows user={user} match={match} alert={alert}/>
+        )} />
+        <Route exact path='/shows/:id' render={({ match }) => (
+          <Show user={user} match={match} alert={alert}/>
+        )} />
+        <Route exact path='/reviews/:id' render={({ match }) => (
+          <Review user={user} match={match} alert={alert}/>
+        )} />
+
+        <Route exact path ='/reviews' component={Reviews} user={user} />
 
         <AuthenticatedRoute user={user} path='/create-review' render={({ match }) => (
-          <CreateReview user={user} />
+          <CreateReview user={user} match={match} alert={alert} />
+        )} />
+
+        <AuthenticatedRoute user={user} path='/reviews/:id/edit' render={({ match }) => (
+          <EditReview match={match} alert={alert} user={user} />
         )} />
 
         <AuthenticatedRoute user={user} path='/create-show' render={({ match }) => (
-          <CreateShow user={user} />
+          <CreateShow match={match} alert={alert} user={user} />
         )} />
 
         <Route path='/sign-up' render={() => (

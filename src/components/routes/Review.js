@@ -5,24 +5,50 @@ import Button from 'react-bootstrap/Button'
 
 import apiUrl from '../../apiConfig'
 import Layout from '../shared/Layout'
+import messages from '../AutoDismissAlert/messages'
 
 const Review = props => {
   const [review, setReview] = useState(null)
   const [deleted, setDeleted] = useState(false)
+  const { alert } = props
 
   useEffect(() => {
     axios(`${apiUrl}/reviews/${props.match.params.id}`)
       .then(res => setReview(res.data.review))
-      .catch(console.error)
+      .catch(error => {
+        alert({
+          heading: 'Error Getting Reviews',
+          message: messages.reviewIndexFailure,
+          variant: 'danger'
+        })
+        throw (error)
+      })
   }, [])
 
   const destroy = () => {
     axios({
       url: `${apiUrl}/reviews/${props.match.params.id}`,
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Token ${props.user.token}`
+      },
+      data: { }
     })
       .then(() => setDeleted(true))
-      .catch(console.error)
+      .then(() => alert({
+        heading: 'Succesfully Deleted Review',
+        message: messages.reviewEditSuccess,
+        variant: 'success'
+      }))
+
+      .catch(error => {
+        alert({
+          heading: 'Error Deleting Review',
+          message: messages.reviewEditFailure,
+          variant: 'danger'
+        })
+        throw (error)
+      })
   }
 
   if (!review) {
@@ -35,18 +61,25 @@ const Review = props => {
     } />
   }
 
+  // const authenticatedOptions = (
+  //   <Fragment>
+  //     <Button variant="outline-danger" onClick={destroy}>Delete Review</Button>
+  //     <Link to={`/reviews/${props.match.params.id}/edit`}>
+  //       <Button variant="outline-warning">Edit Review</Button>
+  //     </Link>
+  //   </Fragment>
+  // )
+
   return (
-    <Layout>
+    <Layout user={props.user}>
       <h4>{review.title}</h4>
       <p>{review.body}</p>
       <p>Rating: {review.rating}</p>
-      <button onClick={destroy}>Delete Review</button>
+      <Button variant="outline-danger" onClick={destroy}>Delete Review</Button>
       <Link to={`/reviews/${props.match.params.id}/edit`}>
-        <Button variant="outline-danger">
-        Edit Review
-        </Button>
+        <Button variant="outline-warning">Edit Review</Button>
       </Link>
-      <Link to="/reviews">Back to all reviews</Link>
+      <Link to={`/shows/${review.show_id}`}>Back to Show Page</Link>
     </Layout>
   )
 }

@@ -7,7 +7,7 @@ import apiUrl from '../../apiConfig'
 import Layout from '../shared/Layout'
 // import Reviews from './Reviews'
 
-const Show = (props, { user }) => {
+const Show = (props) => {
   const [show, setShow] = useState(null)
 
   useEffect(() => {
@@ -25,13 +25,19 @@ const Show = (props, { user }) => {
       <Link className="card-header" to={`/reviews/${review.id}`}>{review.title}
       </Link>
       <div className="card-text">{review.body}</div>
-      <div className="card-footer">{review.user}</div>
+      <div className="card-footer">{review.user_id}</div>
     </div>
   ))
 
-  // const avgRating = show.reviews.reduce(reviews => (
-  //
-  // ))
+  // const authenticatedOptions = (
+  //   <Fragment>
+  //     <Link to={'/create-review'}>
+  //       <Button variant="outline-success" className="create-review-btn">
+  //       Create a Review
+  //       </Button>
+  //     </Link>
+  //   </Fragment>
+  // )
 
   return (
     <Layout>

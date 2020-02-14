@@ -5,10 +5,12 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import ReviewForm from '../shared/ReviewForm'
 import Layout from '../shared/Layout'
+import messages from '../AutoDismissAlert/messages'
 
 const ReviewEdit = props => {
-  const [review, setReview] = useState({ title: '', body: '', rating: '' })
+  const [review, setReview] = useState({ title: '', body: '', rating: '', show_id: '' })
   const [updated, setUpdated] = useState(false)
+  const { alert } = props
 
   useEffect(() => {
     axios(`${apiUrl}/reviews/${props.match.params.id}`)
@@ -18,8 +20,7 @@ const ReviewEdit = props => {
 
   const handleChange = event => {
     event.persist()
-
-    setReview({ ...review, [event.target.name]: event.target.value })
+    setReview(review => ({ ...review, [event.target.name]: event.target.value }))
   }
 
   const handleSubmit = event => {
@@ -29,10 +30,25 @@ const ReviewEdit = props => {
     axios({
       url: `${apiUrl}/reviews/${props.match.params.id}`,
       method: 'PATCH',
+      headers: {
+        'Authorization': `Token ${props.user.token}`
+      },
       data: { review }
     })
       .then(() => setUpdated(true))
-      .catch(console.error)
+      .then(() => alert({
+        heading: 'Huzzah!',
+        message: messages.reviewEditSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        alert({
+          heading: 'Review Edit Failed',
+          message: messages.reviewEditFailure,
+          variant: 'danger'
+        })
+        throw (error)
+      })
   }
 
   if (updated) {
@@ -40,12 +56,12 @@ const ReviewEdit = props => {
   }
 
   return (
-    <Layout>
+    <Layout user={props.user}>
       <ReviewForm
         review={review}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        cancelPath={`/reviews/${props.match.params.id}`}
+        cancelPath={`/shows/${review.show_id}`}
       />
     </Layout>
   )
