@@ -7,6 +7,7 @@ import { Route, Redirect } from 'react-router-dom'
 const AuthenticatedRoute = ({
   user,
   component: Component,
+  alert,
   render,
   ...rest
 }) => {
@@ -18,7 +19,7 @@ const AuthenticatedRoute = ({
   // if props do not include a `user` object then redirect to home
   } else {
     return <Route {...rest} render={props =>
-      user ? <Component {...props} /> : <Redirect to='/' />
+      user ? <Component {...props} /> : <Redirect to='/sign-in' />
     } />
   }
 }

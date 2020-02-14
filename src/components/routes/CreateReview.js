@@ -10,6 +10,7 @@ import messages from '../AutoDismissAlert/messages'
 const ReviewCreate = (props) => {
   const [review, setReview] = useState({ title: '', body: '', rating: '', show_id: '' })
   const [createdReviewId, setCreatedReviewId] = useState(null)
+  const { alert } = props
 
   const handleChange = event => {
     event.persist()
@@ -44,7 +45,7 @@ const ReviewCreate = (props) => {
   }
 
   if (createdReviewId) {
-    return <Redirect to={`/shows/${createdReviewId}`} />
+    return <Redirect to={`/shows/${review.show_id}`} />
   }
 
   return (
@@ -53,7 +54,7 @@ const ReviewCreate = (props) => {
         review={review}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        cancelPath="/shows"
+        cancelPath={`/shows/${review.show_id}`}
       />
     </Layout>
   )
